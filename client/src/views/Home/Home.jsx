@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
-export default function Home({ player }) {
+export default function Home() {
+	const user = useSelector((state) => state.userLogged);
+
 	const [chars, setChars] = useState([]);
 	const [outfits, setOutfits] = useState([]);
 	const [selectedCharacter, setSelectedCharacter] = useState(null);
 	const [selectedTop, setSelectedTop] = useState(null);
 	const [selectedBottom, setSelectedBottom] = useState(null);
 	const [selectedShoes, setSelectedShoes] = useState(null);
-	const [myCharacters, setMyCharacters] = useState({});
-	const playerHome = player.username;
+	const [myCharacters, setMyCharacters] = useState([]);
 
 	const getChars = async () => {
 		const { data } = await axios.get("http://localhost:3002/characters/");
@@ -33,7 +35,12 @@ export default function Home({ player }) {
 			bottom: selectedBottom,
 			shoes: selectedShoes,
 		};
-		const updatedCharacters = [...myCharacters, newCharacter];
+
+		const updatedCharacters =
+			myCharacters.length === 0
+				? [newCharacter]
+				: [...myCharacters, newCharacter];
+
 		setMyCharacters(updatedCharacters);
 		setSelectedCharacter(null);
 		setSelectedTop(null);
@@ -41,10 +48,12 @@ export default function Home({ player }) {
 		setSelectedShoes(null);
 	};
 
+	console.log("myChars", myCharacters);
+
 	return (
 		<div className="flex flex-col items-center w-full mt-10">
 			<h1 className="font-onest text-main font-black uppercase text-5xl">
-				bienvenido {playerHome}
+				WELCOME {user.username}
 			</h1>
 			<p className="pt-10 font-onest font-semibold text-xl text-orange">
 				Personajes:
