@@ -8,10 +8,10 @@ export default function NavBar() {
 					<Link to="/home" className="hover:text-green">
 						Home
 					</Link>
-					<Link to="/home" className="hover:text-green">
+					<Link to="/myCharacters" className="hover:text-green">
 						My Characters
 					</Link>
-					<Link to="/home" className="hover:text-green">
+					<Link to="/allOutfits" className="hover:text-green">
 						Find Outfits
 					</Link>
 				</div>

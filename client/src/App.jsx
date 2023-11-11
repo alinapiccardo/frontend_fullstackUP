@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer.jsx";
 import Inicio from "./views/InicioSesion/Inicio.jsx";
 import Registro from "./views/InicioSesion/Registro.jsx";
 import Home from "./views/Home/Home";
+import AllOutfits from "./views/AllOutfits/AllOutfits.jsx";
 import { userLogin, getUserLoggedIn } from "./redux/actions.js";
 
 function App() {
@@ -39,14 +41,16 @@ function App() {
 	};
 
 	return (
-		<>
+		<div className="w-full overflow-x-hidden max-h-screen">
 			{showNavbar && <NavBar />}
 			<Routes>
 				<Route path="/" element={<Inicio login={login} />} />
 				<Route path="/registrar" element={<Registro />} />
 				<Route path="/home" element={<Home />} />
+				<Route path="/allOutfits" element={<AllOutfits />} />
 			</Routes>
-		</>
+			<Footer />
+		</div>
 	);
 }
 export default App;
