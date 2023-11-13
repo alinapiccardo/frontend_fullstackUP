@@ -21,7 +21,6 @@ export const userLogin = (username, password) => {
 					type: USER_LOGIN,
 					payload: data,
 				});
-				// console.log(data);
 				dispatch(getUserLoggedIn(data));
 				window.alert("INICIO EXITOSO");
 			}
