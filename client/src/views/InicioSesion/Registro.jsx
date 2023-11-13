@@ -1,8 +1,10 @@
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Registro() {
+	const navigate = useNavigate();
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
@@ -25,7 +27,9 @@ export default function Registro() {
 			});
 
 			if (response.status === 201) {
-				//history.push("/login");
+				setTimeout(() => {
+					navigate("/");
+				}, 1000);
 				alert("Registro exitoso.");
 				setError("");
 			} else {
@@ -33,7 +37,6 @@ export default function Registro() {
 				console.log(response.data.error);
 			}
 		} catch (error) {
-			// console.log("error", error.response.data.error);
 			setError(error.response.data.error);
 		}
 	};

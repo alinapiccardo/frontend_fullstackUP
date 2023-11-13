@@ -30,9 +30,7 @@ export default function Home() {
 
 	const handleConfirmSelection = () => {
 		if (!selectedTop || !selectedBottom || !selectedShoes) {
-			alert(
-				"Please choose a top, bottom, and shoes before confirming the selection."
-			);
+			alert("Elegir completamente el atuendo por favor.");
 			return;
 		}
 
@@ -63,24 +61,21 @@ export default function Home() {
 		setSelectedBottom(null);
 		setSelectedShoes(null);
 
-		addOutfitToCharacter(updatedCharacter);
+		addOutfitToCharacter(updatedCharacter, user);
 	};
 
-	const addOutfitToCharacter = async (updatedCharacter) => {
-		console.log("uC in addOutfit", updatedCharacter);
+	const addOutfitToCharacter = async (updatedCharacter, user) => {
 		try {
 			await axios.put(
 				`http://localhost:3002/characters/${updatedCharacter._id}`,
-				updatedCharacter
+				{ ...updatedCharacter, user }
 			);
-
-			console.log("Character updated successfully!");
+			alert("Outfit creado correctamente");
 		} catch (error) {
+			alert("Error updating character:", error);
 			console.error("Error updating character:", error);
 		}
 	};
-
-	console.log("myChars", myCharacters);
 
 	return (
 		<div className="flex flex-col items-start ml-[100px] mt-5 bg-white w-full p-10">
@@ -208,7 +203,12 @@ export default function Home() {
 				</div>
 			)}
 
-			<button onClick={handleConfirmSelection}>Confirmar Selección</button>
+			<button
+				onClick={handleConfirmSelection}
+				className="bg-main text-orange font-onest font-bold text-2xl mt-14 py-3 px-4 rounded-xl hover:bg-cyan hover:text-white"
+			>
+				Confirmar Selección
+			</button>
 		</div>
 	);
 }

@@ -9,6 +9,7 @@ import Inicio from "./views/InicioSesion/Inicio.jsx";
 import Registro from "./views/InicioSesion/Registro.jsx";
 import Home from "./views/Home/Home";
 import AllOutfits from "./views/AllOutfits/AllOutfits.jsx";
+import MyCharacters from "./views/MyCharacters/MyCharacters.jsx";
 import { userLogin, getUserLoggedIn } from "./redux/actions.js";
 
 function App() {
@@ -47,7 +48,8 @@ function App() {
 				<Route path="/" element={<Inicio login={login} />} />
 				<Route path="/registrar" element={<Registro />} />
 				<Route path="/home" element={<Home />} />
-				<Route path="/allOutfits" element={<AllOutfits />} />
+				<Route path="/allOutfits" element={<AllOutfits user={user} />} />
+				<Route path="/myCharacters" element={<MyCharacters user={user} />} />
 			</Routes>
 			<Footer />
 		</div>
